@@ -1,0 +1,10 @@
+{
+  "title": "triplej scrobbler",
+  "description": "A little app to scrobble my triple j listens",
+  "name": "triplej-scrobbler",
+  "repository": "https://github.com/bennovakovic/triplej-scrobbler",
+  "version": "0.0.1",
+  "devDependencies": {
+    "utf8": "^2.1.0"
+  }
+}
