@@ -5,6 +5,7 @@ var http = require('http');
 
 var options = {
   host: config.sonos_server,
+  port: config.sonos_port,
   path: '/zones'
 };
 
@@ -18,7 +19,8 @@ var processZoneResponse = function(response) {
   });
 
   //the whole response has been recieved, so we just print it out here
-  response.on('end', function () {
+  response.on('end', function (er) {
+    console.log(er);
     console.log(str);
     var d = JSON.parse(str);
     console.log(d);
