@@ -49,7 +49,6 @@ ajax.get(options).done(function(data) {
   try {
     if(data[0].coordinator.state.zoneState === 'PLAYING') {
       var currentTrack = data[0].coordinator.state.currentTrack;
-      console.log(currentTrack);
 
       // lets find out we are listening to at the moment.
       for(var station in config.stations) {
@@ -76,7 +75,6 @@ ajax.get(options).done(function(data) {
 
               // if the file doesnt exist, just scrobble the track.
               if(data.errno) {
-                console.log('scrobble it.');
                 lastfmNowPlaying(theStation.lastfm || config.lastfm, track);
                 writeFile(filename, track);
                 scrobbleDeferred.reject();
@@ -86,7 +84,6 @@ ajax.get(options).done(function(data) {
               if(!(data.track === track.track
                 && data.artist === track.artist
                 && data.played_time == track.played_time)) {
-                console.log('its a differnet track, scrobble the track we just listened to.');
                 // update the now playing
                 lastfmNowPlaying(theStation.lastfm || config.lastfm, track);
                 writeFile(filename, track);
@@ -99,12 +96,6 @@ ajax.get(options).done(function(data) {
               return;
 
             });
-
-            // lets make sure this track isn't the same as the last one we heard.
-            //
-
-            // now we have a track, lets scrobble it.
-
           });
         }
       }

@@ -15,7 +15,6 @@ var unearthed = function() {
   };
 
   ajax.get(options).done(function(d) {
-    console.log('we got the data!', d.now);
     try {
       var trackName = d.now.recording.title;
       var artistName = d.now.recording.artists[0].name;
