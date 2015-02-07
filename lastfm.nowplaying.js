@@ -19,9 +19,6 @@ var lastfmNowPlaying = function(lastfm, track) {
       'artist' : track.artist,
       'track' : track.track
   }, function (err, scrobbles) {
-      if (err) { return console.log('We\'re in trouble', err); }
-
-      console.log('We are just listening to:', scrobbles);
   });
 
 }

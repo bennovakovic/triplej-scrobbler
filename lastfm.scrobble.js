@@ -7,12 +7,6 @@ var LastfmAPI = require('lastfmapi');
 
 
 var lastfmScrobble = function(lastfm, track) {
-  console.log('lets scrobble', lastfm, track);
-  // var options = {
-  //   host : 'www.last.fm',
-  //   path : '/api/auth/?api_key=' + key + '&cb=http://example.com'
-  // }
-  //
 
   var lfm = new LastfmAPI({
       'api_key' : lastfm.api_key,
@@ -32,6 +26,7 @@ var lastfmScrobble = function(lastfm, track) {
   //     console.log(session); // {"name": "LASTFM_USERNAME", "key": "THE_USER_SESSION_KEY"}
   // });
   //
+
   lfm.setSessionCredentials(lastfm.user, lastfm.session_key);
 
   lfm.track.scrobble({
@@ -39,9 +34,6 @@ var lastfmScrobble = function(lastfm, track) {
       'track' : track.track,
       'timestamp' : track.played_time
   }, function (err, scrobbles) {
-      if (err) { return console.log('We\'re in trouble', err); }
-
-      console.log('We have just scrobbled:', scrobbles);
   });
 
   // ajax.get(options).done(function(data) {

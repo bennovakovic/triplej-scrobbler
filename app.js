@@ -26,11 +26,6 @@ var loadJSONFile = function(file) {
 var writeFile = function(file, data) {
   var def = deferred();
   fs.writeFile(file, JSON.stringify(data) + '\n', function(err) {
-      if(err) {
-          console.log(err);
-      } else {
-          console.log("The file was saved!");
-      }
       def.resolve(err);
   });
   return def.promise;
@@ -64,13 +59,6 @@ ajax.get(options).done(function(data) {
             }
             var filename = config.cacheFolder + theStation.module + '.json';
 
-            var scrobbleDeferred = deferred();
-            scrobbleDeferred.promise.done(function(trackObj) {
-              console.log('Scrobble: ', trackObj.artist, ' - ', trackObj.track);
-              lastfmScrobble(theStation.lastfm || config.lastfm, trackObj);
-              // writeFile(filename, trackObj);
-            }, function() {});
-
             // lets get the cache file.
             loadJSONFile(filename).done(function(data) {
 
@@ -79,7 +67,6 @@ ajax.get(options).done(function(data) {
                 console.log('Now Playing: ', track.artist, ' - ', track.track);
                 lastfmNowPlaying(theStation.lastfm || config.lastfm, track);
                 writeFile(filename, track);
-                scrobbleDeferred.reject();
                 return;
               }
 
@@ -92,10 +79,10 @@ ajax.get(options).done(function(data) {
                 writeFile(filename, track);
 
                 // scrobble the last track which is in the cache..
-                scrobbleDeferred.resolve(data);
+                console.log('Scrobble: ', data.artist, ' - ', data.track);
+                lastfmScrobble(theStation.lastfm || config.lastfm, data);
                 return;
               }
-              scrobbleDeferred.reject();
               return;
 
             });
