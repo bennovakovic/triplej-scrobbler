@@ -5,6 +5,9 @@
   "repository": "https://github.com/bennovakovic/triplej-scrobbler",
   "version": "0.0.1",
   "devDependencies": {
+    "MD5": "^1.2.1",
+    "deferred": "^0.7.2",
+    "lastfmapi": "0.0.5",
     "utf8": "^2.1.0"
   }
 }
