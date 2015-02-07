@@ -7,7 +7,6 @@ var deferred = require('deferred');
 
 var unearthed = function() {
   var def = deferred();
-  console.log('we ran the module...');
 
   var options = {
     host : 'music.abcradio.net.au',

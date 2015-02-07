@@ -66,6 +66,7 @@ ajax.get(options).done(function(data) {
 
             var scrobbleDeferred = deferred();
             scrobbleDeferred.promise.done(function(trackObj) {
+              console.log('Scrobble: ', trackObj.artist, ' - ', trackObj.track);
               lastfmScrobble(theStation.lastfm || config.lastfm, trackObj);
               // writeFile(filename, trackObj);
             }, function() {});
@@ -75,6 +76,7 @@ ajax.get(options).done(function(data) {
 
               // if the file doesnt exist, just scrobble the track.
               if(data.errno) {
+                console.log('Now Playing: ', track.artist, ' - ', track.track);
                 lastfmNowPlaying(theStation.lastfm || config.lastfm, track);
                 writeFile(filename, track);
                 scrobbleDeferred.reject();
@@ -85,6 +87,7 @@ ajax.get(options).done(function(data) {
                 && data.artist === track.artist
                 && data.played_time == track.played_time)) {
                 // update the now playing
+                console.log('Now Playing: ', track.artist, ' - ', track.track);
                 lastfmNowPlaying(theStation.lastfm || config.lastfm, track);
                 writeFile(filename, track);
 
