@@ -13,7 +13,7 @@ var loadJSONFile = function(file) {
   var def = deferred();
   fs.readFile(file, 'utf8', function (err,data) {
     if(err) {
-      def.resolve(err);
+      def.resolve(false);
     }
     else {
       var d = JSON.parse(data);
@@ -63,14 +63,15 @@ ajax.get(options).done(function(data) {
             loadJSONFile(filename).done(function(data) {
 
               // if the file doesnt exist, just scrobble the track.
-              if(data.errno) {
-                console.log('Now Playing: ', track.artist, ' - ', track.track);
-                lastfmNowPlaying(theStation.lastfm || config.lastfm, track);
-                writeFile(filename, track);
-                return;
-              }
+              // if(!data) {
+              //   console.log('Now Playing: ', track.artist, ' - ', track.track);
+              //   lastfmNowPlaying(theStation.lastfm || config.lastfm, track);
+              //   writeFile(filename, track);
+              //   return;
+              // }
 
-              if(!(data.track === track.track
+              // if we have no data, or its a different track
+              if(!data || !(data.track === track.track
                 && data.artist === track.artist
                 && data.played_time == track.played_time)) {
                 // update the now playing
@@ -79,8 +80,10 @@ ajax.get(options).done(function(data) {
                 writeFile(filename, track);
 
                 // scrobble the last track which is in the cache..
-                console.log('Scrobble: ', data.artist, ' - ', data.track);
-                lastfmScrobble(theStation.lastfm || config.lastfm, data);
+                if(data) {
+                  console.log('Scrobble: ', data.artist, ' - ', data.track);
+                  lastfmScrobble(theStation.lastfm || config.lastfm, data);
+                }
                 return;
               }
               return;

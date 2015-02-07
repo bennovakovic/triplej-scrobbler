@@ -17,7 +17,12 @@ var unearthed = function() {
     try {
       var trackName = d.now.recording.title;
       var artistName = d.now.recording.artists[0].name;
-      var playedTime = Date.parse(d.now.played_time)/1000 + d.now.recording.duration;
+
+      var duration = 0;
+      if(d.now.recording.duration) {
+        duration = d.now.recording.duration;
+      }
+      var playedTime = Date.parse(d.now.played_time)/1000 + duration;
       def.resolve({artist : artistName, track : trackName, played_time: playedTime});
     }
     catch(e) {
