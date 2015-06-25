@@ -32,7 +32,8 @@ var lastfmScrobble = function(lastfm, track) {
   lfm.track.scrobble({
       'artist' : track.artist,
       'track' : track.track,
-      'timestamp' : track.played_time
+      'timestamp' : track.played_time,
+      'duration' : track.duration
   }, function (err, scrobbles) {
   });
 

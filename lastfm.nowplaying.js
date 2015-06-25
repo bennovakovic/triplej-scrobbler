@@ -17,7 +17,8 @@ var lastfmNowPlaying = function(lastfm, track) {
 
   lfm.track.updateNowPlaying({
       'artist' : track.artist,
-      'track' : track.track
+      'track' : track.track,
+      'duration' : track.duration
   }, function (err, scrobbles) {
   });
 
