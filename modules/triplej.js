@@ -10,7 +10,7 @@ var unearthed = function() {
 
   var options = {
     host : 'music.abcradio.net.au',
-    path : '/api/v1/plays/unearthed/now.json'
+    path : '/api/v1/plays/triplej/now.json'
   };
 
   ajax.get(options).done(function(d) {
